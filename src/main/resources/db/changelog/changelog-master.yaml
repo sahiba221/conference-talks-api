@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/2026-10-22-create-users.sql
+  - include:
+      file: db/changelog/2026-10-22-insert-users.sql
+  - include:
+      file: db/changelog/2026-10-22-update-users.sql
+  - include:
+      file: db/changelog/2026-10-22-delete-users.sql
+  - include:
+      file: db/changelog/2026-10-22-drop-users.sql
