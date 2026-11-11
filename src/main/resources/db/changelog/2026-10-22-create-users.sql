@@ -1,11 +1,16 @@
 --liquibase formatted sql
 
 --changeset sahiba:1
-create table users(
-    id serial primary key,
-    username varchar(50) not null unique,
-    email varchar(100) not null,
-    password varchar (50) not null
+CREATE TABLE IF NOT EXISTS legacy_users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL,
+    password VARCHAR(100) NOT NULL
 );
 
---rollback Drop Table users;
+CREATE TABLE IF NOT EXISTS conference_sponsors (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    tier VARCHAR(50) NOT NULL
+);
+--rollback DROP TABLE IF EXISTS conference_sponsors; DROP TABLE IF EXISTS legacy_users;
