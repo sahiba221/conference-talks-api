@@ -21,7 +21,9 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/public/test").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/users/**", "/user/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/users/**", "/user/**", "/api/users/**").permitAll()
+                        .requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**").permitAll()
+                        .requestMatchers("/api/speakers/**", "/speakers/**", "/api/talks/**", "/talks/**").permitAll()
                         .requestMatchers("/user/test").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/admin/test").hasRole("ADMIN")
                         .anyRequest().authenticated()
@@ -30,23 +32,6 @@ public class SecurityConfig {
 
         return http.build();
     }
-
-//    @Bean
-//    public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
-//        UserDetails normalUser = User.builder()
-//                .username("user")
-//                .password(passwordEncoder.encode("1234"))
-//                .roles("USER")
-//                .build();
-//
-//        UserDetails adminUser = User.builder()
-//                .username("admin")
-//                .password(passwordEncoder.encode("12345"))
-//                .roles("ADMIN")
-//                .build();
-//
-//        return new InMemoryUserDetailsManager(normalUser, adminUser);
-//    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
